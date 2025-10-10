@@ -13,7 +13,7 @@ nginx - веб-сервер.
 <img width="1670" height="797" alt="image" src="https://github.com/user-attachments/assets/2114ea8d-4744-4e61-b856-1ba283c6e70c" />  
 Результат захода на публичный ipv4 подключения.
 <img width="1230" height="941" alt="image" src="https://github.com/user-attachments/assets/abb6c096-4e12-460b-8f39-3e05c5e7cbb9" />  
-## Задание 4. Логирование и мониторинг
+
 Name:webserver101025  
 Application and OS image : ubuntu  
 Instance type: t3-micro  
@@ -28,5 +28,7 @@ apt install -y htop nginx
 systemctl enable nginx  
 systemctl start nginx  
 ```
-
+## Задание 4. Логирование и мониторинг
+Проверка статуса:  
+<img width="1625" height="385" alt="image" src="https://github.com/user-attachments/assets/f7de7e1a-d76c-4836-9e2e-6ca0637a2749" />  
 
