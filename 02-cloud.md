@@ -38,9 +38,13 @@ Instance screenshot
 Почему в AWS нельзя использовать пароль для входа по SSH?- Использование пароля для публично доступных EC2-инстансов делает их уязвимыми для атак из интернета.  
 <img width="955" height="498" alt="image" src="https://github.com/user-attachments/assets/21fe015f-3c26-4144-8a04-f38ed20625c7" />  
 ## Задание 6a. Развёртывание статического веб-сайта (Для специализаций Frontend & Backend & Security)
+scp - (secure copy)используется для копирования файлов между компьютером и удалённым сервером по SSH.  
+<img width="1030" height="465" alt="image" src="https://github.com/user-attachments/assets/7914e412-f10e-4ffe-bd78-e99fc513959d" />  
+<img width="1919" height="1077" alt="image" src="https://github.com/user-attachments/assets/24552bc4-71cc-4092-a301-0a584dc3b03c" />  
 
+<img width="969" height="625" alt="image" src="https://github.com/user-attachments/assets/02b539f7-491b-430f-a411-697d8bb64015" />  
 
-
+<img width="1000" height="787" alt="image" src="https://github.com/user-attachments/assets/a8720850-d1d9-4236-958b-e5f0823841c0" />  
 
 
 
