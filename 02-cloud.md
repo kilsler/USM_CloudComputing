@@ -1,19 +1,32 @@
 ## Задание 0. Подготовка среды
 Уже было настроено во время предыдущих лабораторных работ.
 ## Задание 1. Создание IAM группы и пользователя
-Уже было создано в время предыдущих лабораторных работ.
+Уже было создано в время предыдущих лабораторных работ.  
+Политика AdministratorAccess - предоставляет полные права на все ресурсы AWS(Создавать пользователей, инстансы и пользоваться любыми сервисами AWS).
 ## Задание 2. Настройка Zero-Spend Budget
 Уже было создано во время предыдущих лабораторных работ.
 ## Задание 3. Создание и запуск EC2 экземпляра (виртуальной машины)
-<img width="1254" height="274" alt="image" src="https://github.com/user-attachments/assets/30904582-5cd3-4de2-b3b5-855821942c3c" />  
-<img width="1222" height="593" alt="image" src="https://github.com/user-attachments/assets/5ad23dfa-b535-4fcb-bd7d-c48e741867c8" />  
-<img width="1238" height="319" alt="image" src="https://github.com/user-attachments/assets/bb1d0d87-bb2f-49ae-9f59-2ddbf3ed97c4" />  
-<img width="1245" height="243" alt="image" src="https://github.com/user-attachments/assets/9277733f-15f7-4ccf-94a9-489593056140" />  
-<img width="1231" height="623" alt="image" src="https://github.com/user-attachments/assets/ec7d2a08-f7de-4a9d-b276-ffa8977f68d8" />  
-<img width="1900" height="795" alt="image" src="https://github.com/user-attachments/assets/001fe105-0e0b-40ac-aabb-c3ff9a69cbac" />  
-<img width="1590" height="250" alt="image" src="https://github.com/user-attachments/assets/9fc1d2ae-d982-419b-8906-441e335c64bc" />  
-
-
-
+User Data — это специальный раздел настроек при создании EC2-инстанса, куда можно вставить скрипт, который автоматически выполняется при первом запуске .  
+nginx - веб-сервер.   
+Полученный инстанс  
+<img width="1656" height="158" alt="image" src="https://github.com/user-attachments/assets/b95e9d64-80a3-4bf0-88de-fef0061fd91b" />  
+<img width="1670" height="797" alt="image" src="https://github.com/user-attachments/assets/2114ea8d-4744-4e61-b856-1ba283c6e70c" />  
+Результат захода на публичный ipv4 подключения.
+<img width="1230" height="941" alt="image" src="https://github.com/user-attachments/assets/abb6c096-4e12-460b-8f39-3e05c5e7cbb9" />  
+## Задание 4. Логирование и мониторинг
+Name:webserver101025  
+Application and OS image : ubuntu  
+Instance type: t3-micro  
+Key-pair name: Vladimir-101025-keypair
+Security group: webserver-sg  
+Advanced details → User Data:  
+```  
+#!/bin/bash  
+apt update -y  
+apt upgrade -y  
+apt install -y htop nginx  
+systemctl enable nginx  
+systemctl start nginx  
+```
 
 
