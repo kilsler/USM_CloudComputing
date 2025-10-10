@@ -39,3 +39,25 @@ Instance screenshot
 <img width="955" height="498" alt="image" src="https://github.com/user-attachments/assets/21fe015f-3c26-4144-8a04-f38ed20625c7" />  
 ## Задание 6a. Развёртывание статического веб-сайта (Для специализаций Frontend & Backend & Security)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
