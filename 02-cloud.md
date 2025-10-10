@@ -31,4 +31,11 @@ systemctl start nginx
 ## Задание 4. Логирование и мониторинг
 Проверка статуса:  
 <img width="1625" height="385" alt="image" src="https://github.com/user-attachments/assets/f7de7e1a-d76c-4836-9e2e-6ca0637a2749" />  
+Детализированный мониторинг нужен там, где важна быстрая реакция на изменения.  
+Instance screenshot
+<img width="922" height="427" alt="image" src="https://github.com/user-attachments/assets/5032c378-32ee-4bc4-bd64-b6084c383cfa" />  
+## Задание 5. Подключение к EC2 инстансу по SSH
+Почему в AWS нельзя использовать пароль для входа по SSH?- Использование пароля для публично доступных EC2-инстансов делает их уязвимыми для атак из интернета.  
+<img width="955" height="498" alt="image" src="https://github.com/user-attachments/assets/21fe015f-3c26-4144-8a04-f38ed20625c7" />  
+## Задание 6a. Развёртывание статического веб-сайта (Для специализаций Frontend & Backend & Security)
 
