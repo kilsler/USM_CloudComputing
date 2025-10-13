@@ -36,6 +36,8 @@ Instance screenshot:
 <img width="922" height="427" alt="image" src="https://github.com/user-attachments/assets/5032c378-32ee-4bc4-bd64-b6084c383cfa" />  
 ## Задание 5. Подключение к EC2 инстансу по SSH
 Почему в AWS нельзя использовать пароль для входа по SSH?- Использование пароля для публично доступных EC2-инстансов делает их уязвимыми для атак из интернета.  
+Подключается при помощи команды:  
+ssh -i yournickname-keypair.pem ec2-user@<Public-IP>. 
 <img width="955" height="498" alt="image" src="https://github.com/user-attachments/assets/21fe015f-3c26-4144-8a04-f38ed20625c7" />  
 ## Задание 6a. Развёртывание статического веб-сайта (Для специализаций Frontend & Backend & Security)
 * scp - (secure copy)используется для копирования файлов между компьютером и удалённым сервером по SSH.  
