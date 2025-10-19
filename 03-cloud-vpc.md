@@ -9,7 +9,24 @@
 различает публичные и приватные маршруты.  
 
 ## Шаг 1. Создание VPC
-ВБиваем в поиск VPC
+Вопрос: Что обозначает маска /16? И почему нельзя использовать, например, /8? - 
+Находим VPC среди сервисов амазона заходим и создаем новую сеть.  
+Name tag: student-vpc-k19
+IPv4 CIDR block: 10.19.0.0/16
+Tenancy: Default
+Нажмите Create VPC.
+<img width="1703" height="812" alt="image" src="https://github.com/user-attachments/assets/e7c16845-8e65-4b80-b174-5ff00adfcf54" />  
+## Шаг 2. Создание Internet Gateway (IGW)
+
+В левой панели выбераем Internet Gateways → Create internet gateway.  
+Укажите имя: student-igw-k19.  
+Теперь нужно “прикрепить” (Attach) шлюз к сети:  
+Выбераем созданный IGW.  
+Нажмаем Actions → Attach to VPC.  
+В списке выберираем student-vpc-kXX.  
+Подтверждаем.  
+<img width="1707" height="755" alt="image" src="https://github.com/user-attachments/assets/c9b8acbc-fe47-4408-9503-ec7a9a143337" />  
+## Шаг 3. Создание подсетей
 
 
 
