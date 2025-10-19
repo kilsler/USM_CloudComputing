@@ -81,18 +81,144 @@ Target: выберите Internet Gateway (student-igw-kXX).
 
 Отметьте public-subnet-kXX и нажмите Save associations.  
 
-<img width="1664" height="447" alt="image" src="https://github.com/user-attachments/assets/aaf1253e-badc-499f-99ac-d87b4015f141" />
+<img width="1664" height="447" alt="image" src="https://github.com/user-attachments/assets/aaf1253e-badc-499f-99ac-d87b4015f141" />  
 
 ### Создание приватной таблицы маршрутов
 
+Нажмите Create route table ещё раз.  
+Укажите:  
+Name tag: private-rt-kXX  
+VPC: student-vpc-kXX  
+Нажмите Create route table.  
+Перейдите на вкладку Subnet associations → Edit subnet associations.  
+Отметьте private-subnet-kXX и нажмите Save associations.  
+На данный момент все ресурсы, которые будут созданы в приватной подсети, не смогут выходить в Интернет, так как у нас нет NAT Gateway и соответствующего маршрута.  
+
+<img width="1670" height="413" alt="image" src="https://github.com/user-attachments/assets/ed73bcab-e669-4e3a-9ae0-35c7fdbc3416" />  
+
+## Шаг 6. Создание NAT Gateway
+
+### Шаг 6.1. Создание Elastic IP
+Elastic IP — это статический публичный IPv4-адрес, закреплённый за вашим аккаунтом AWS. Он используется для NAT Gateway, чтобы тот мог представлять собой “точку выхода” в Интернет от имени всех приватных инстансов.  
+В левой панели выберите Elastic IPs → Allocate Elastic IP address.  
+Нажмите Allocate.  
+<img width="1682" height="339" alt="image" src="https://github.com/user-attachments/assets/345b025c-b9d9-47ad-aa74-bd7d22137bdd" />  
+
+### Шаг 6.2. Создание NAT Gateway  
+В левой панели выберите NAT Gateways → Create NAT gateway.  
+Укажите:  
+Name tag: nat-gateway-kXX  
+Subnet: выберите публичную подсеть (public-subnet-kXX)  
+NAT Gateway всегда создаётся в публичной подсети, потому что ему нужен прямой выход в Интернет через IGW.  
+
+Connectivity type: Public  
+Elastic IP allocation ID: выберите EIP, созданный на предыдущем шаге.  
+Нажмите Create NAT gateway.  
+Подождите 2–3 минуты, пока статус изменится с Pending на Available. Это значит, что NAT Gateway готов к работе.  
+<img width="1663" height="565" alt="image" src="https://github.com/user-attachments/assets/643681f9-0a97-47db-883f-79b75b5e2e57" />  
+
+### Шаг 6.3. Изменение приватной таблицы маршрутов  
+Вернитесь в Route Tables и выберите private-rt-kXX.  
+Перейдите на вкладку Routes и нажмите Edit routes → Add route.  
+Заполните:  
+Destination: 0.0.0.0/0  
+Target: выберите NAT Gateway (nat-gateway-kXX).  
+Нажмите Save changes.  
+Теперь ресурсы в приватной подсети смогут выходить в Интернет через NAT Gateway.  
+<img width="1692" height="466" alt="image" src="https://github.com/user-attachments/assets/dacbb60d-4630-44d7-b29e-c6ec518eb1b3" />  
+
+## Шаг 7. Создание Security Groups
+Security Group (SG) — это виртуальный брандмауэр на уровне инстанса (EC2), который контролирует входящий (Inbound) и исходящий (Outbound) трафик.  
+
+В левой панели выберите Security Groups → Create security group.  
+Укажите:  
+Security group name: web-sg-k19  
+Description: Security group for web server  
+VPC: выберите вашу VPC (student-vpc-k19)  
+В разделе Inbound rules добавьте правила разрешающее следующие типы трафика:  
+Тип: HTTP, Протокол: TCP, Порт: 80, Источник: 0.0.0.0/0  
+Тип: HTTPS, Протокол: TCP, Порт: 443, Источник: 0.0.0.0/0  
+Создайте еще две Security Groups:  
+bastion-sg-kXX для bastion host с разрешением входящего трафика на порт 22 (SSH) только из вашего IP-адреса.  
+db-sg-kXX для базы данных с разрешением входящего трафика:  
+Тип: MySQL/Aurora, Протокол: TCP, Порт: 3306, Источник: web-sg-kXX (разрешаем доступ только с веб-сервера)  
+Тип: SSH, Протокол: TCP, Порт: 22, Источник: bastion-sg-kXX (разрешаем доступ только с bastion host)  
+Что такое Bastion Host и зачем он нужен в архитектуре с приватными подсетями?  
+<img width="1135" height="358" alt="image" src="https://github.com/user-attachments/assets/b94c81d7-fd01-4420-8904-041cb546f374" />  
+
+## Шаг 8. Создание EC2-инстансов
+оздайте три EC2-инстанса, которые будут выполнять следующие роли:  
+
+Веб-сервер (web-server) - в публичной подсети, доступен из Интернета по HTTP.  
+Сервер базы данных (db-server) - в приватной подсети, недоступен напрямую извне.  
+Bastion Host (bastion-host) - в публичной подсети, для безопасного доступа к приватным ресурсам.  
+В строке поиска AWS Console введите EC2 и откройте консоль.  
+Создадите 3 инстанса, следуя инструкциям ниже.  
+Для всех инстансов используйте:  
+
+AMI: Amazon Linux 2 AMI (HVM), SSD Volume Type  
+Тип инстанса: t3.micro  
+Ключ доступа (Key Pair): создайте новый ключ student-key-kXX и скачайте его.  
+Хранилище: оставьте по умолчанию (8 ГБ).  
+Теги: добавьте тег Name с соответствующим именем инстанса.  
+Для web-server:  
+
+Выберите сеть VPC: student-vpc-kXX  
+
+Подсеть Subnet: public-subnet-kXX  
+
+Auto-assign Public IP: Enable  
+
+Security Group: выберите web-sg-kXX  
+
+В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки веб-сервера:  
+
+#!/bin/bash  
+dnf install -y httpd php  
+echo "<?php phpinfo(); ?>" > /var/www/html/index.php  
+systemctl enable httpd  
+systemctl start httpd  
+<img width="1786" height="767" alt="image" src="https://github.com/user-attachments/assets/637be389-eec0-49c4-99cf-e370adf5bafd" />
+
+Для db-server:  
+
+Выберите сеть VPC: student-vpc-kXX  
+
+Подсеть Subnet: private-subnet-kXX  
+
+Auto-assign Public IP: Disable  
+
+Security Group: выберите db-sg-kXX  
+
+В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки MySQL сервера:  
+
+#!/bin/bash  
+dnf install -y mariadb105-server  
+systemctl enable mariadb  
+systemctl start mariadb  
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'StrongPassword123!'; FLUSH PRIVILEGES;"  
+<img width="1779" height="774" alt="image" src="https://github.com/user-attachments/assets/7ea48ea0-d38b-428a-b192-b3815bf797d0" />
+
+Для bastion-host:  
+
+Выберите сеть VPC: student-vpc-kXX  
+
+Подсеть Subnet: public-subnet-kXX  
+
+Auto-assign Public IP: Enable  
+
+Security Group: выберите bastion-sg-kXX  
+
+В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки MySQL клиента:  
+
+#!/bin/bash  
+dnf install -y mariadb105  
+
+<img width="1797" height="738" alt="image" src="https://github.com/user-attachments/assets/e0c446d9-712c-4710-89f4-7a5ce269c9d5" />
 
 
-
-
-
-
-
-
+Итог:  
+<img width="1704" height="399" alt="image" src="https://github.com/user-attachments/assets/0c29ef63-f02c-4f2a-b059-8b0c541b4395" />  
 
 
 
