@@ -221,7 +221,32 @@ dnf install -y mariadb105
 <img width="1704" height="399" alt="image" src="https://github.com/user-attachments/assets/0c29ef63-f02c-4f2a-b059-8b0c541b4395" />  
 
 
+## Шаг 9. Проверка работы
+
+Теперь важно убедиться, что сеть функционирует корректно и что приватная подсеть действительно изолирована от внешнего мира.  
+
+Подождите, пока все инстансы запустятся (статус running).  
+
+Найдите публичный IP-адрес web-server и откройте его в браузере. Вы должны увидеть страницу с информацией о PHP.  
+
+Подключитесь к bastion-host по SSH:  
+
+ssh -i <your-nickname>-key.pem ec2-user@<Bastion-Host-Public-IP>  
+Проверьте подключение к интернету с bastion-host выполнив ping:  
+
+   ping -c 4 google.com  
+Если пинги успешны, значит публичная подсеть и IGW настроены правильно.  
+
+С bastion-host попробуйте подключиться к db-server:  
+
+mysql -h <DB-Server-Private-IP> -u root -p  
+Если подключение успешно, значит ваша приватная подсеть и NAT Gateway настроены правильно.  
+
+Выйдите из db-server и bastion-host.  
+<img width="1160" height="658" alt="image" src="https://github.com/user-attachments/assets/78a92f2b-c391-4ced-b0d5-48e1f910b8da" />   
 
 
+<img width="1118" height="618" alt="image" src="https://github.com/user-attachments/assets/0b007c6a-2573-4ea4-bb87-caf7d67a62e1" />  
+Скрипт userData не устанвоил mysql, не могу подклчиться и проверить дб.
 
 
