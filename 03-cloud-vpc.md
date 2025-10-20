@@ -48,12 +48,12 @@ IPv4 CIDR block: 10.19.1.0/24
 
 Нажмите Create subnet ещё раз.
 Укажите:
-VPC ID: выберите вашу сеть student-vpc-kXX
+VPC ID: выберите вашу сеть student-vpc-k19
 Используем ту же VPC, чтобы обе подсети могли взаимодействовать между собой.
 
 Subnet name: private-subnet-kXX
-Availability Zone: Выберите любую другую зону
-IPv4 CIDR block: 10.(k%30).2.0/24
+Availability Zone: Выбераем любую другую зону
+IPv4 CIDR block: 10.19.2.0/24
 Диапазон адресов не должен пересекаться с диапазоном публичной подсети.
 
 Нажмите Create subnet.
@@ -61,12 +61,12 @@ IPv4 CIDR block: 10.(k%30).2.0/24
 <img width="1688" height="537" alt="image" src="https://github.com/user-attachments/assets/d9795620-9871-4dda-b33e-dc2cf2b6ffd6" />  
 
 ### Создание публичной таблицы маршрутов  
-В левой панели выберите Route Tables → Create route table.  
+В левой панели выбераем Route Tables → Create route table.  
 Укажите:  
-Name tag: public-rt-kXX  
-VPC: student-vpc-kXX  
+Name tag: public-rt-k19  
+VPC: student-vpc-k19  
 Нажмите Create route table  
-Перейдите на вкладку Routes и нажмите Edit routes → Add route.  
+Переходим на вкладку Routes и нажмите Edit routes → Add route.  
 Заполните:  
 Destination: 0.0.0.0/0  
 Это означает “весь остальной трафик, не относящийся к внутренним адресам VPC”.  
@@ -77,9 +77,7 @@ Target: выберите Internet Gateway (student-igw-kXX).
 <img width="1910" height="628" alt="image" src="https://github.com/user-attachments/assets/0029a9a8-c569-4714-83b3-c5c867b0d038" />
 
 Перейдите на вкладку Subnet associations → Edit subnet associations.  
-Зачем необходимо привязать таблицу маршрутов к подсети?  
-
-Отметьте public-subnet-kXX и нажмите Save associations.  
+Отметьте public-subnet-k19 и нажмите Save associations.  
 
 <img width="1664" height="447" alt="image" src="https://github.com/user-attachments/assets/aaf1253e-badc-499f-99ac-d87b4015f141" />  
 
@@ -105,7 +103,7 @@ Elastic IP — это статический публичный IPv4-адрес,
 <img width="1682" height="339" alt="image" src="https://github.com/user-attachments/assets/345b025c-b9d9-47ad-aa74-bd7d22137bdd" />  
 
 ### Шаг 6.2. Создание NAT Gateway  
-В левой панели выберите NAT Gateways → Create NAT gateway.  
+В левой панели выбераем NAT Gateways → Create NAT gateway.  
 Укажите:  
 Name tag: nat-gateway-kXX  
 Subnet: выберите публичную подсеть (public-subnet-kXX)  
@@ -113,7 +111,7 @@ NAT Gateway всегда создаётся в публичной подсети
 
 Connectivity type: Public  
 Elastic IP allocation ID: выберите EIP, созданный на предыдущем шаге.  
-Нажмите Create NAT gateway.  
+Нажимаем Create NAT gateway.  
 Подождите 2–3 минуты, пока статус изменится с Pending на Available. Это значит, что NAT Gateway готов к работе.  
 <img width="1663" height="565" alt="image" src="https://github.com/user-attachments/assets/643681f9-0a97-47db-883f-79b75b5e2e57" />  
 
@@ -131,7 +129,7 @@ Target: выберите NAT Gateway (nat-gateway-kXX).
 Security Group (SG) — это виртуальный брандмауэр на уровне инстанса (EC2), который контролирует входящий (Inbound) и исходящий (Outbound) трафик.  
 
 В левой панели выберите Security Groups → Create security group.  
-Укажите:  
+Указываем:  
 Security group name: web-sg-k19  
 Description: Security group for web server  
 VPC: выберите вашу VPC (student-vpc-k19)  
@@ -139,15 +137,15 @@ VPC: выберите вашу VPC (student-vpc-k19)
 Тип: HTTP, Протокол: TCP, Порт: 80, Источник: 0.0.0.0/0  
 Тип: HTTPS, Протокол: TCP, Порт: 443, Источник: 0.0.0.0/0  
 Создайте еще две Security Groups:  
-bastion-sg-kXX для bastion host с разрешением входящего трафика на порт 22 (SSH) только из вашего IP-адреса.  
-db-sg-kXX для базы данных с разрешением входящего трафика:  
-Тип: MySQL/Aurora, Протокол: TCP, Порт: 3306, Источник: web-sg-kXX (разрешаем доступ только с веб-сервера)  
-Тип: SSH, Протокол: TCP, Порт: 22, Источник: bastion-sg-kXX (разрешаем доступ только с bastion host)  
+bastion-sg-k19 для bastion host с разрешением входящего трафика на порт 22 (SSH) только из вашего IP-адреса.  
+db-sg-k19 для базы данных с разрешением входящего трафика:  
+Тип: MySQL/Aurora, Протокол: TCP, Порт: 3306, Источник: web-sg-k19 (разрешаем доступ только с веб-сервера)  
+Тип: SSH, Протокол: TCP, Порт: 22, Источник: bastion-sg-k19 (разрешаем доступ только с bastion host)  
 Что такое Bastion Host и зачем он нужен в архитектуре с приватными подсетями?  
 <img width="1135" height="358" alt="image" src="https://github.com/user-attachments/assets/b94c81d7-fd01-4420-8904-041cb546f374" />  
 
 ## Шаг 8. Создание EC2-инстансов
-оздайте три EC2-инстанса, которые будут выполнять следующие роли:  
+Создаем три EC2-инстанса, которые будут выполнять следующие роли:  
 
 Веб-сервер (web-server) - в публичной подсети, доступен из Интернета по HTTP.  
 Сервер базы данных (db-server) - в приватной подсети, недоступен напрямую извне.  
@@ -160,7 +158,7 @@ AMI: Amazon Linux 2 AMI (HVM), SSD Volume Type
 Тип инстанса: t3.micro  
 Ключ доступа (Key Pair): создайте новый ключ student-key-kXX и скачайте его.  
 Хранилище: оставьте по умолчанию (8 ГБ).  
-Теги: добавьте тег Name с соответствующим именем инстанса.  
+Теги: добавляем тег Name с соответствующим именем инстанса.  
 Для web-server:  
 
 Выберите сеть VPC: student-vpc-kXX  
@@ -171,7 +169,7 @@ Auto-assign Public IP: Enable
 
 Security Group: выберите web-sg-kXX  
 
-В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки веб-сервера:  
+В разделе Advanced Details в поле User data вставляем следующий скрипт для автоматической установки веб-сервера:  
 
 #!/bin/bash  
 dnf install -y httpd php  
@@ -190,7 +188,7 @@ Auto-assign Public IP: Disable
 
 Security Group: выберите db-sg-kXX  
 
-В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки MySQL сервера:  
+В разделе Advanced Details в поле User data вставляем следующий скрипт для автоматической установки MySQL сервера:  
 
 #!/bin/bash  
 dnf install -y mariadb105-server  
@@ -209,7 +207,7 @@ Auto-assign Public IP: Enable
 
 Security Group: выберите bastion-sg-kXX  
 
-В разделе Advanced Details в поле User data вставьте следующий скрипт для автоматической установки MySQL клиента:  
+В разделе Advanced Details в поле User data вставляем следующий скрипт для автоматической установки MySQL клиента:  
 
 #!/bin/bash  
 dnf install -y mariadb105  
@@ -247,6 +245,6 @@ mysql -h <DB-Server-Private-IP> -u root -p
 
 
 <img width="1118" height="618" alt="image" src="https://github.com/user-attachments/assets/0b007c6a-2573-4ea4-bb87-caf7d67a62e1" />  
-Скрипт userData не устанвоил mysql, не могу подклчиться и проверить дб.
+Скрипт userData не установил mysql, не могу подклчиться и проверить дб.
 
 
