@@ -83,7 +83,10 @@ Block all public access: оставить галочку
 <img width="1917" height="507" alt="image" src="https://github.com/user-attachments/assets/33c9d87b-cc16-4d1b-87e0-335bcd017668" />
 
 ### Шаг 5 Проверка доступа к объектам
-
+https://cc-lab4-pub-k19-default-was-already-taken.s3.eu-central-1.amazonaws.com/avatars/1.jpg  
+https://cc-lab4-pub-k19-default-was-already-taken.s3.eu-central-1.amazonaws.com/avatars/2.jpg  
+<img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/605a558e-640c-4353-931b-96b49731501d" />  
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b0773456-593c-47ff-92bc-e2cb2f7aa935" />
 
 ### Шаг 6 Версионирование объектов
 
