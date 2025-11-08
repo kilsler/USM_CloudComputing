@@ -111,8 +111,25 @@ Expiration → удалить через 1825 дней (5 лет)
 <img width="823" height="558" alt="image" src="https://github.com/user-attachments/assets/ce4ca371-7e29-417c-8953-bfef383c0dbd" />
 
 ### Шаг 8 Создание статического веб-сайта на базе S3
+Создайте бакет cc-lab4-web-19-moroz для хостинга статического сайта:  
+Имя: cc-lab4-web-k19-moroz  
+Region: eu-central-1  
+Object Ownership: ACLs enabled (Can be configured using ACLs)  
+Block all public access: снять галочку (разрешить публичность)  
 
+<img width="686" height="50" alt="image" src="https://github.com/user-attachments/assets/c28c4315-4979-471b-a476-398dd631e71d" />
+После создания настройте хостинг:  
 
-### Шаг 9 Дополнительное задание. Загрузка файлов через AWS SDK
+Перейдите в бакет → вкладка Properties → Static website hosting → Edit -> Enable.  
 
+Выберите следующие параметры:  
 
+Hosting type: Host a static website.  
+Index document: index.html.  
+Проанализируйте веб-сайт, прикрепленный к данной лабораторной работе: веб-сайт  
+
+Скопируйте файлы веб-сайта в бакет cc-lab4-web-kXX. Не забудьте сделать файлы публичными!  
+
+Откройте URL статического сайта, указанный в настройках S3.  
+https://cc-lab4-web-k19-moroz.s3.eu-central-1.amazonaws.com/index.html  
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/85b34ab4-4f6e-4bf8-ab75-20dd1eb1ad23" />
