@@ -87,15 +87,28 @@ https://cc-lab4-pub-k19-default-was-already-taken.s3.eu-central-1.amazonaws.com/
 https://cc-lab4-pub-k19-default-was-already-taken.s3.eu-central-1.amazonaws.com/avatars/2.jpg  
 <img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/605a558e-640c-4353-931b-96b49731501d" />  
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b0773456-593c-47ff-92bc-e2cb2f7aa935" />  
-
 <img width="1918" height="1077" alt="image" src="https://github.com/user-attachments/assets/f9434ed2-cee5-4b44-ae99-441d15269e89" />  
-
 
 ### Шаг 6 Версионирование объектов
 
+Включите версионирование для обоих бакетов через вкладку Properties → Bucket Versioning → Enable.  
+
+Измените файл logo.png и загрузите его заново, чтобы увидеть создание новой версии.  
+Посмотрите вкладку Versions, там будут отображаться все версии объекта.  
+<img width="1596" height="201" alt="image" src="https://github.com/user-attachments/assets/9a0a88e8-c87e-4596-85a9-9e2e21533abf" />
+<img width="1047" height="282" alt="image" src="https://github.com/user-attachments/assets/8d1f300d-2f78-43fd-b9ad-3795cb23fa03" />
 
 ### Шаг 7 Создание Lifecycle-правил для приватного бакета
 
+В приватном бакете зайдите в Management → Lifecycle rules → Create rule.  
+Имя: logs-archive  
+Префикс: logs/  
+Actions:  
+Transition → Standard-IA через 30 дней  
+Transition → Glacier Deep Archive через 365 дней  
+Expiration → удалить через 1825 дней (5 лет)  
+Сохраните правило: Create rule.  
+<img width="823" height="558" alt="image" src="https://github.com/user-attachments/assets/ce4ca371-7e29-417c-8953-bfef383c0dbd" />
 
 ### Шаг 8 Создание статического веб-сайта на базе S3
 
