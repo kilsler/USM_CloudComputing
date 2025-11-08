@@ -23,8 +23,8 @@
 
 Выбраны форматы имён бакетов:  
 
-Публичный: cc-lab4-pub-kXX  
-Приватный: cc-lab4-priv-kXX  
+Публичный: cc-lab4-pub-k19-default-was-already-taken  
+Приватный: cc-lab4-priv-k19-default-was-already-taken  
 Локально (на своем компьютере) создана структура каталогов и файлов, как показано ниже:
 ```
 s3-lab/
@@ -40,7 +40,20 @@ s3-lab/
 ```
 
 ### Шаг 2 Создание бакетов
+Выбран способ - использовать ACL (упрощённый, наглядный),
+Публичный бакет:
 
+Имя: cc-lab4-pub-k19-default-was-already-taken  
+Region: eu-central-1  
+Object Ownership: ACLs enabled (Can be configured using ACLs)  
+Block all public access: снять галочку (разрешить публичность)  
+
+Приватный бакет:
+Имя: cc-lab4-priv-k19-default-was-already-taken  
+Region: eu-central-1  
+Object Ownership: ACLs enabled (Can be configured using ACLs)  
+Block all public access: оставить галочку  
+<img width="1911" height="782" alt="image" src="https://github.com/user-attachments/assets/b7716dcc-46ea-4910-b5e4-4f4579d9b626" />
 
 ### Шаг 3 Загрузка объектов через AWS Management Console
 
