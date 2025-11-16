@@ -67,8 +67,6 @@ Maintanance (Enable auto minor version upgrade) снимите галочку (�
 Дождитесь завершения создания базы данных (статус должен измениться на Available).  
 <img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/1b445f74-b0cf-4b50-89f1-630b65dec744" />
 
-<img width="1905" height="494" alt="image" src="https://github.com/user-attachments/assets/3f29da95-60d8-4ef3-bf94-649ba17aef5b" />
-
 копируем Endpoint вашей базы данных (он понадобится для подключения).  
 ```
 project-rds-mysql-prod.cpy2o0wa6ulk.eu-central-1.rds.amazonaws.com
@@ -102,6 +100,9 @@ mysql -h <RDS_ENDPOINT> -u admin -p
 ```sql
 USE project_db;
 ```
+<img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/e21ed148-b8e6-4d73-9416-8eb54af65b4e" />
+
+
 ### Шаг 5. Создание Read Replica
 
 Выберите базу данных RDS в консоли AWS.  
