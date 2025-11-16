@@ -20,6 +20,10 @@
 Входящий: MySQL/Aurora (порт 3306) от web-security-group (т.е. только ресурсы, принадлежащие этой группе безопасности, смогут подключаться к базе данных);
 4. Измените web-security-group, добавив правило для исходящего трафика:  
 Исходящий: MySQL/Aurora (порт 3306) к db-mysql-security-group (т.е. ваше приложение сможет инициализировать соединение с базой данных).
+Созданные security groups:
+<img width="1905" height="494" alt="image" src="https://github.com/user-attachments/assets/6f6e6016-a5d8-450d-84a9-c26ea2b5735f" />
+Созданные vpc:
+<img width="1905" height="494" alt="image" src="https://github.com/user-attachments/assets/30e0ddbb-5237-4c3f-bc09-6f48adbcea8a" />
 
 ### Шаг 2. Развертывание Amazon RDS
 
@@ -61,9 +65,14 @@ Maintanance (Enable auto minor version upgrade) снимите галочку (�
 Нажмите Create database для создания базы данных.  
 
 Дождитесь завершения создания базы данных (статус должен измениться на Available).  
+<img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/1b445f74-b0cf-4b50-89f1-630b65dec744" />
+
+<img width="1905" height="494" alt="image" src="https://github.com/user-attachments/assets/3f29da95-60d8-4ef3-bf94-649ba17aef5b" />
 
 копируем Endpoint вашей базы данных (он понадобится для подключения).  
-
+```
+project-rds-mysql-prod.cpy2o0wa6ulk.eu-central-1.rds.amazonaws.com
+```
 ### Шаг 3. Создание виртуальной машины для подключения к базе данных  
 
 Создаем виртуальную машину EC2 в публичной подсети вашего VPC, чтобы использовать её для подключения к базе данных RDS.  
@@ -76,6 +85,9 @@ Maintanance (Enable auto minor version upgrade) снимите галочку (�
 dnf update -y
 dnf install -y mariadb105
 ```
+Созданная EC2
+<img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/a5506c2f-1f9d-4f6e-a744-28555cfbe8b4" />
+
 ### Шаг 4. Подключение к базе данных и выполнение базовых операций
 Подключаемся к вашей виртуальной машине EC2 по SSH.
 Подключаемся к базе данных RDS с помощью MySQL клиента:
