@@ -86,6 +86,8 @@ dnf update -y
 dnf install -y mariadb105
 ```
 Созданная EC2
+<img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/f849f2ef-0778-415c-bb6a-333092f1dc4e" />
+
 <img width="1908" height="890" alt="image" src="https://github.com/user-attachments/assets/a5506c2f-1f9d-4f6e-a744-28555cfbe8b4" />
 
 ### Шаг 4. Подключение к базе данных и выполнение базовых операций
