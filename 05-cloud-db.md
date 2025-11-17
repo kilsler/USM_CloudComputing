@@ -159,6 +159,7 @@ CREATE TABLE categories (
 ```  
 <img width="1912" height="1002" alt="image" src="https://github.com/user-attachments/assets/71f406e5-144a-4312-ba64-d30c7d28cfcf" />
 <img width="1912" height="1002" alt="image" src="https://github.com/user-attachments/assets/1f6faff3-394b-4978-b0df-b43d64d67022" />
+<img width="1912" height="1002" alt="image" src="https://github.com/user-attachments/assets/16f7beb5-ca83-4b8c-a59e-f998e806172d" />
 
 ## Контрольные вопросы 
 Отобразилась ли новая запись на реплике? Объясните почему.  
