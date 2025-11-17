@@ -131,11 +131,34 @@ VPC security groups: выберите ту же группу безопасно�
 
 Выберите один из вариантов ниже для подключения приложения к базе данных Amazon RDS и выполнения базовых операций с данными (CRUD).
 #### Шаг 6b. Развертывания PHP-приложения из лабораторной работы 4
-
 Используйте лабораторную работу по дисциплине «Продвинутая веб-разработка (PHP)», в которой ранее применялась локальная база данных.  
 Измените параметры подключения к базе данных в вашем PHP-приложении таким образом, чтобы оно подключалось к Amazon RDS вместо локальной БД.  
 Выполните миграцию данных (вручную или с использованием инструментов автоматической миграции) из локальной базы данных в экземпляр Amazon RDS - при необходимости.  
 Проверьте корректность работы приложения, убедившись, что оно выполняет все основные операции с данными (создание, чтение, обновление и удаление записей - CRUD) через Amazon RDS.  
+Созданая бд для проекта :
+```sql
+CREATE TABLE recipes (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   title VARCHAR(255) NOT NULL,
+   category INT NOT NULL,
+   ingredients TEXT,
+   description TEXT,
+   tags TEXT,
+   steps TEXT,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   FOREIGN KEY (category) REFERENCES categories(id) ON
+DELETE
+	CASCADE
+);
+
+CREATE TABLE categories (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(100) NOT NULL UNIQUE,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```  
+<img width="1912" height="1002" alt="image" src="https://github.com/user-attachments/assets/71f406e5-144a-4312-ba64-d30c7d28cfcf" />
+<img width="1912" height="1002" alt="image" src="https://github.com/user-attachments/assets/1f6faff3-394b-4978-b0df-b43d64d67022" />
 
 ## Контрольные вопросы 
 Отобразилась ли новая запись на реплике? Объясните почему.  
