@@ -66,8 +66,39 @@ Listener: протокол HTTP, порт 80.
 Default action: выберите созданную Target Group project-target-group.  
 Вопрос :Что такое Default action и какие есть типы Default action?  
 Ответ:  Default action — это то действие, которое ALB выполнит, если ни одно из правил listener'а не подошло к запросу.  
-Forward пересылает запрос в выбранную Target Group. Redirect делает HTTP-редирект. Fixed-response возвращает статический ответ.
+Forward пересылает запрос в выбранную Target Group. Redirect делает HTTP-редирект. Fixed-response возвращает статический ответ.  
 
-<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/dc2a95da-fe25-4464-8d01-2841e088b834" />
+<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/dc2a95da-fe25-4464-8d01-2841e088b834" />  
+<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/86bfe025-1ca7-4018-9b3e-dcb6435ae0d5" />  
 
+
+## Шаг 7. Создание Auto Scaling Group
+
+Название: project-auto-scaling-group  
+Launch template: выбераем созданный ранее Launch Template (project-launch-template).  
+В разделе Choose instance launch options .  
+В разделеNetwork:  
+выбираем созданную VPC и две приватные подсети.  
+Availability Zone distribution: выбераем Balanced best effort.  
+В разделе Integrate with other services:  
+ Выбрать Attach to an existing load balancer  
+ Выберать созданную Target Group (project-target-group).  
+В разделе Configure group size and scaling:  
+Минимальное количество инстансов: 2  
+Максимальное количество инстансов: 4  
+Желемое количество инстансов: 2  
+Укажите Target tracking scaling policy и настройте масштабирование по CPU (Average CPU utilization — 50% / Instance warm-up period — 60 seconds).  
+
+В разделе Additional settings ставим галочку на Enable group metrics collection within CloudWatch, чтобы собирать метрики Auto Scaling Group в CloudWatch. Этот пункт позволит нам отслеживать состояние группы и её производительность.  
+
+Вопрос: Что такое Instance warm-up period и зачем он нужен?  
+Ответ: это время (в секундах), в течение которого новый запущенный инстанс не учитывается в метриках Auto Scaling Group и не получает трафик от Load Balancer.
+Вопрос: Почему для Auto Scaling Group выбираются приватные подсети?  
+Ответ: Потому что это лучшая и рекомендуемая практика безопасности в 2025 году.
+Вопрос: Зачем нужна настройка: Availability Zone distribution?  
+Ответ:  Эта настройка определяет, как Auto Scaling Group будет распределять инстансы по зонам доступности (AZ).
+
+
+<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/d75cd26e-7add-4770-8ff3-1f670dbe05c4" />  
+<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/9105643a-1be4-4680-9e07-6fb9ebea2506" />  
 
