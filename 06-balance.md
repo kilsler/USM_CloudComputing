@@ -101,4 +101,12 @@ Availability Zone distribution: выбераем Balanced best effort.
 
 <img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/d75cd26e-7add-4770-8ff3-1f670dbe05c4" />  
 <img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/9105643a-1be4-4680-9e07-6fb9ebea2506" />  
+<img width="1909" height="826" alt="image" src="https://github.com/user-attachments/assets/ee8ba9b3-dbd0-42df-8525-a8713779053d" />  
 
+## Шаг 8. Тестирование Application Load Balancer
+<img width="1913" height="956" alt="image" src="https://github.com/user-attachments/assets/cb43fbca-abe8-43c8-86d2-04ffc07f653d" />
+
+
+## Шаг 9. Тестирование Auto Scaling
+Видно что был создан еще инстанс для обработки:
+<img width="1913" height="956" alt="image" src="https://github.com/user-attachments/assets/0044e2ad-74da-448a-96ee-8d61a960359f" />
